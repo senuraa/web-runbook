@@ -1,3 +1,20 @@
 {
-  "singleQuote": true
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "singleQuote": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "printWidth": 120,
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/generated/**",
+    "**/*.generated.*",
+    "**/*.gen.*",
+    ".nx/**",
+    ".agents/**",
+    ".codex/**",
+    ".github/skills/**",
+    "pnpm-lock.yaml"
+  ]
 }
