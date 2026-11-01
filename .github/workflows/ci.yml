@@ -21,6 +21,7 @@ jobs:
     timeout-minutes: 20
     env:
       NX_DAEMON: 'false'
+      HUSKY: '0'
     steps:
       - name: Check out repository
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -41,7 +42,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Check formatting
-        run: pnpm exec oxfmt --check .
+        run: pnpm nx run repository:format-check --outputStyle=static
 
       - name: List workspace projects
         run: pnpm nx show projects --json

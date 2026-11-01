@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/nx/schemas/project-schema.json",
+  "name": "repository",
+  "targets": {
+    "lint": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "commands": ["pnpm exec eslint . --max-warnings=0", "node tools/check-line-length.mjs"],
+        "parallel": false
+      }
+    },
+    "format": {
+      "command": "pnpm exec oxfmt --write .",
+      "cache": false
+    },
+    "format-check": {
+      "command": "pnpm exec oxfmt --check .",
+      "cache": false
+    },
+    "pre-commit": {
+      "command": "pnpm exec lint-staged --concurrent false",
+      "cache": false
+    }
+  }
+}

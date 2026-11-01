@@ -39,15 +39,20 @@ Keep each item concise and understandable on its own. Link shared context instea
 
 Use `pnpm@12.16.1`:
 
-- `pnpm install`: install dependencies.
-- `pnpm nx show projects`: discover projects (currently none).
+- `pnpm install`: install dependencies and Husky hooks; use `pnpm run prepare` to reinstall hooks in an existing checkout.
+- `pnpm nx show projects`: discover projects, including the root `repository` tooling project.
+- `pnpm nx run repository:format`: format supported files with Oxfmt.
+- `pnpm nx run repository:format-check`: check formatting without rewriting files.
+- `pnpm nx run repository:lint`: run ESLint and the hard line-length check.
 - `pnpm nx run <project>:<target>`: run an existing target.
 
 No product build, test, or development targets exist yet. CI checks formatting and runs all available Nx `lint`, `typecheck`, `build`, `test`, `test-integration`, and `e2e` targets. Register new regression suites under these targets or extend CI when introducing another target; do not leave suites outside the full regression run.
 
 ## Coding Style & Naming
 
-Use strict TypeScript, two-space indentation, and descriptive names. Oxfmt configures single quotes; check files with `pnpm exec oxfmt --check <files>`. No linter is configured.
+Use strict TypeScript, two-space indentation, and descriptive names. Oxfmt configures single quotes and a wrapping target of 120 characters. ESLint checks JavaScript and uses type-aware rules for TypeScript files included in a project tsconfig.
+
+[ADR 0002](docs/adrs/0002-formatting-and-typescript-linting.md) records the implemented formatting and linting policy. Source, tests, and handwritten configuration have a hard 120-character line limit; documentation is exempt, and generated files and lockfiles are excluded. Use the recommended type-aware TypeScript lint baseline with the ADR's selected stricter rules. Pre-commit formats and lints staged files only, preserving unstaged work; tests, builds, and separate type checks stay out of the hook. Agents must fix hook failures rather than bypass them. CI independently enforces the complete checks. Keep ESLint and Oxfmt; reconsider Oxlint only if measured CI linting time becomes a bottleneck and required rule coverage is verified.
 
 ## Testing Guidelines
 
