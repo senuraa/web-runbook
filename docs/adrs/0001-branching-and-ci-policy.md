@@ -42,13 +42,18 @@ Reconsider affected-only execution when measured CI duration becomes a problem. 
 
 Contributions have small, traceable changes and consistent automated checks. Full-suite runtime will grow with the project and should be observed before changing this policy. The single maintainer remains responsible for merge decisions. Passing checks are not an independent human review.
 
-The maintainer subsequently authorized initial setup directly through GitHub CLI, explicitly exempting this setup from TDD. GitHub Actions provides the required `CI` check using Node.js 24 and the pnpm version declared in `package.json`. The workflow runs all available Nx validation targets and `test`, `test-integration`, and `e2e` regression targets, with regression cache replay disabled. No product test suites exist yet; frameworks remain undecided. Record material changes to this policy in a superseding ADR.
+The maintainer subsequently authorized initial setup directly through GitHub CLI, explicitly exempting this setup from TDD. GitHub Actions provides the required `CI` check using Node.js 24 and the pnpm version declared in `package.json`. The workflow checks formatting and runs all available Nx `lint`, `typecheck`, and `build` targets.
+
+[ADR 0003](0003-testing-and-coverage.md) extends this policy with the implemented Vitest setup and per-package coverage gates. CI invokes `repository:test-ci` to run each eligible project's combined `test-all` target once, collecting coverage for production sources. Separate local `test` and `test-integration` targets remain available but are not rerun in CI. Available `e2e` targets run separately. Regression execution does not replay cached results.
+
+Repository tooling tests are implemented; no product test suites exist yet. Browser tooling and the mock recruitment portal remain deferred until UI work. Record material changes to this policy in a superseding ADR.
 
 The active [Protect main ruleset](https://github.com/senuraa/web-runbook/rules) has no bypass actors and requires checks from GitHub Actions against up-to-date code. Its configuration is stored in `.github/rulesets/main.json`. Squash-only merging and automatic branch deletion are repository settings.
 
 ## References
 
 - [Project setup design](../milestones/milestone-1/features/feature-1-project-setup/design.md)
+- [ADR 0003: Testing and coverage](0003-testing-and-coverage.md)
 - [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)
 - [Available ruleset rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
 - [GitHub pull request reviews](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-proposed-changes-in-a-pull-request)
