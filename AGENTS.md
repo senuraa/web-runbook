@@ -1,3 +1,35 @@
+# Repository Guidelines
+
+## Project Structure & Direction
+
+WebRunbook is in discovery. Read `README.md` and `docs/project-brief.md`; distinguish proposals from implementation. `packages/` is empty; no source, tests, or assets exist. `nx.json` and `tsconfig.base.json` configure the workspace.
+
+## Development Commands
+
+Use `pnpm@12.16.1`:
+
+- `pnpm install`: install dependencies.
+- `pnpm nx show projects`: discover projects (currently none).
+- `pnpm nx run <project>:<target>`: run an existing target.
+
+No build, test, or development targets exist.
+
+## Coding Style & Naming
+
+Use strict TypeScript, two-space indentation, and descriptive names. Oxfmt configures single quotes; check files with `pnpm exec oxfmt --check <files>`. No linter is configured.
+
+## Testing Guidelines
+
+No framework, naming convention, or coverage threshold exists. Document these when adding tests. Use a local mock recruitment portal for browser testing.
+
+## Commits & Pull Requests
+
+History uses imperative subjects, such as “Update README”; no enforced prefix exists. Explain changes, validation, and unresolved decisions in PRs. Link relevant issues.
+
+## Automation Boundaries
+
+Require human authorization before application submission. Never bypass access controls, CAPTCHAs, or anti-bot protections.
+
 <!-- nx configuration start-->
 <!-- Leave the start & end comments to automatically receive updates. -->
 
