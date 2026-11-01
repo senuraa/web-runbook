@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/vitest",
+    "types": ["node", "vitest"],
+    "composite": true,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "declarationMap": false
+  },
+  "include": ["vitest.config.mts", "tools/**/*.mts", "tools/**/*.mjs", "tools/**/*.test.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", "coverage"]
+}

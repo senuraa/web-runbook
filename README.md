@@ -60,7 +60,7 @@ The workspace declares `pnpm@12.16.1` as its package manager. With that version 
 pnpm install
 ```
 
-Use Node.js 24, matching CI. Installation also enables the Husky pre-commit hook; run `pnpm run prepare` to reinstall it in an existing checkout. Commits format and lint staged files without running tests or builds. See [Repository Guidelines](AGENTS.md) for the contribution workflow.
+Use Node.js 26 LTS (26.13.0 or later within 26.x), matching CI and the runtime range in `package.json`. Installation also enables the Husky pre-commit hook; run `pnpm run prepare` to reinstall it in an existing checkout. Commits format and lint staged files without running tests or builds. See [Repository Guidelines](AGENTS.md) for the contribution workflow.
 
 Run the repository checks through Nx:
 
@@ -71,6 +71,8 @@ pnpm nx run repository:lint
 ```
 
 Oxfmt uses two spaces and a 120-character wrapping target. A separate lint check enforces the hard limit for source, tests, and handwritten configuration; documentation is exempt. ESLint supplies the JavaScript and type-aware TypeScript rules.
+
+See [Testing](docs/testing.md) for Vitest commands, the required 80% coverage gate, and adding package suites.
 
 As projects and targets are added, inspect them and run tasks through Nx:
 
