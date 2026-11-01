@@ -13,7 +13,7 @@ This is an open-source project developed with AI assistance. Keep contributor co
 - `docs/milestones/milestone-1-<name>/features/feature-1-<name>/design.md`: feature behavior, acceptance criteria, component responsibilities, interfaces, testing strategy, and links to applicable ADRs.
 - `implementation-plan.md` beside each feature's `design.md`: small, independently testable behavioral work items and their status.
 
-The initial `milestone-1/features/feature-1/` directories are placeholders; add descriptive names when scope is agreed. Use `.gitkeep` to retain empty directories until documents replace the placeholders.
+Current setup work belongs to [Milestone 1](docs/milestones/milestone-1/README.md), [Feature 1: Project setup](docs/milestones/milestone-1/features/feature-1-project-setup/design.md). Use `.gitkeep` to retain empty directories until documents replace the placeholders.
 
 For each feature:
 
@@ -43,7 +43,7 @@ Use `pnpm@12.16.1`:
 - `pnpm nx show projects`: discover projects (currently none).
 - `pnpm nx run <project>:<target>`: run an existing target.
 
-No build, test, or development targets exist.
+No product build, test, or development targets exist yet. CI checks formatting and runs all available Nx `lint`, `typecheck`, `build`, `test`, `test-integration`, and `e2e` targets. Register new regression suites under these targets or extend CI when introducing another target; do not leave suites outside the full regression run.
 
 ## Coding Style & Naming
 
@@ -61,9 +61,15 @@ Do not write the implementation before observing the failing test. Derive tests 
 
 No framework, naming convention, or coverage threshold exists. Document these when adding tests. Use a local mock recruitment portal for browser testing.
 
+CI must run the full available regression suite on every PR, including retained unit, integration, and browser tests as those suites are introduced. Each bug fix must add a regression test that reproduces the bug before the fix. Revisit affected-only CI execution when measured CI duration becomes a problem; it is not the current policy.
+
 ## Commits & Pull Requests
 
 History uses imperative subjects, such as “Update README”; no enforced prefix exists. Explain changes, validation, and unresolved decisions in PRs. Link relevant issues.
+
+Follow [ADR 0001](docs/adrs/0001-branching-and-ci-policy.md): branch from current `main`, keep branches short-lived, and submit focused PRs linked to approved plan items. Use descriptive names such as `feat/validate-inputs`, `fix/missing-input-error`, `docs/project-setup-design`, or `chore/configure-ci`. Squash-merge and delete merged branches.
+
+The approved policy requires PRs, passing CI, resolved review conversations, linear history, and protection against force pushes and deletion of `main`. Require zero reviewer approvals while there is one maintainer; design and implementation-plan approvals still apply. Introduce required CI checks as their tooling becomes available. The active `Protect main` GitHub ruleset enforces these requirements. `.github/rulesets/main.json` records its configuration; `.github/workflows/ci.yml` supplies the required `CI` check.
 
 ## Automation Boundaries
 
