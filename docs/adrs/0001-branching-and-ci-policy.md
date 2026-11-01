@@ -1,6 +1,6 @@
 # ADR 0001: Branching and CI policy
 
-- Status: Accepted
+- Status: Accepted; merge method and linear-history requirements superseded by [ADR 0004](0004-merge-commit-policy.md)
 - Decision date: 2026-11-01
 - Scope: Milestone 1, Feature 1 — Project setup
 - Enforcement: Active GitHub ruleset; CI workflow supplied by the initial setup change
@@ -13,14 +13,14 @@ WebRunbook is an open-source project developed with AI assistance and initially 
 
 Use GitHub Flow with `main` as the integration branch. Create short-lived branches from current `main` for independently testable work items or cohesive documentation changes. External contributors can submit PRs from forks. Link implementation PRs to their approved plan items and include validation results.
 
-Use descriptive branch names, such as `feat/validate-inputs`, `fix/missing-input-error`, `docs/project-setup-design`, and `chore/configure-ci`. Squash-merge completed PRs and delete merged branches. Track milestones in documentation and issues rather than long-lived milestone branches.
+Use descriptive branch names, such as `feat/validate-inputs`, `fix/missing-input-error`, `docs/project-setup-design`, and `chore/configure-ci`. The original decision was to squash-merge completed PRs; [ADR 0004](0004-merge-commit-policy.md) replaces that method with merge commits. Delete merged branches. Track milestones in documentation and issues rather than long-lived milestone branches.
 
 Protect `main` with an active branch ruleset requiring:
 
 - A pull request before merging.
 - Passing required CI checks, introduced as the corresponding tooling becomes available.
 - Resolution of review conversations.
-- Linear history, with squash merging selected as the repository merge method.
+- Originally, linear history with squash merging; superseded by ADR 0004's merge-commit policy without a linear-history requirement.
 - Blocking force pushes and deletion of `main`.
 - Zero required reviewer approvals while the project has one maintainer.
 
@@ -48,12 +48,13 @@ The maintainer subsequently authorized initial setup directly through GitHub CLI
 
 Repository tooling tests are implemented; no product test suites exist yet. Browser tooling and the mock recruitment portal remain deferred until UI work. Record material changes to this policy in a superseding ADR.
 
-The active [Protect main ruleset](https://github.com/senuraa/web-runbook/rules) has no bypass actors and requires checks from GitHub Actions against up-to-date code. Its configuration is stored in `.github/rulesets/main.json`. Squash-only merging and automatic branch deletion are repository settings.
+The active [Protect main ruleset](https://github.com/senuraa/web-runbook/rules) has no bypass actors and requires checks from GitHub Actions against up-to-date code. Its configuration is stored in `.github/rulesets/main.json`. Merge-commit-only integration and automatic branch deletion are repository settings, as specified by [ADR 0004](0004-merge-commit-policy.md).
 
 ## References
 
 - [Project setup design](../milestones/milestone-1/features/feature-1-project-setup/design.md)
 - [ADR 0003: Testing and coverage](0003-testing-and-coverage.md)
+- [ADR 0004: Merge commits for pull requests](0004-merge-commit-policy.md)
 - [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)
 - [Available ruleset rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
 - [GitHub pull request reviews](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-proposed-changes-in-a-pull-request)

@@ -16,7 +16,7 @@ Obtain approval of the complete plan once. Agents may then implement its items w
 
 ## Branching and CI
 
-[ADR 0001](../../../../adrs/0001-branching-and-ci-policy.md) defines the accepted policy: short-lived branches and focused PRs into protected `main`, squash merges, and zero required reviewer approvals for the sole maintainer.
+[ADR 0001](../../../../adrs/0001-branching-and-ci-policy.md), amended by [ADR 0004](../../../../adrs/0004-merge-commit-policy.md), defines the accepted policy: short-lived branches and focused PRs into protected `main`, merge commits preserving each PR's individual commits, and zero required reviewer approvals for the sole maintainer. Squash and rebase merging are disabled; linear history is not required.
 
 CI checks formatting, linting, types, builds, and the full available regression suite as their tooling is introduced. Existing behavior remains covered by retained tests; bug fixes add reproductions. Browser regression tests exercise a local mock recruitment portal. Every PR receives a conclusive CI result, including documentation-only contributions.
 
@@ -58,7 +58,7 @@ Vitest was chosen over Jest and Node's built-in runner for its TypeScript and ES
 - Approved plan items describe observable requirements and can be implemented without separate approval for each item.
 - Changes to `main` require a PR and successful required checks; force pushes and deletion are blocked.
 - A sole maintainer can merge a compliant PR without another reviewer's approval.
-- Merges preserve linear history, and merged branches are removed.
+- PRs merge with a merge commit, preserving their individual commits, and merged branches are removed.
 - Unresolved review conversations prevent merging.
 - A failing regression test prevents a PR from satisfying CI requirements.
 - Every PR runs the full available regression suite; documentation-only changes do not leave required checks waiting indefinitely.

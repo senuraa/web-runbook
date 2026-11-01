@@ -83,9 +83,9 @@ CI must run the full available regression suite on every PR, including retained 
 
 History uses imperative subjects, such as “Update README”; no enforced prefix exists. Explain changes, validation, and unresolved decisions in PRs. Link relevant issues.
 
-Follow [ADR 0001](docs/adrs/0001-branching-and-ci-policy.md): branch from current `main`, keep branches short-lived, and submit focused PRs linked to approved plan items. Use descriptive names such as `feat/validate-inputs`, `fix/missing-input-error`, `docs/project-setup-design`, or `chore/configure-ci`. Squash-merge and delete merged branches.
+Follow [ADR 0001](docs/adrs/0001-branching-and-ci-policy.md) and [ADR 0004](docs/adrs/0004-merge-commit-policy.md): branch from current `main`, keep branches short-lived, and submit focused PRs linked to approved plan items. Use descriptive names such as `feat/validate-inputs`, `fix/missing-input-error`, `docs/project-setup-design`, or `chore/configure-ci`. Merge PRs with a merge commit, preserving their individual commits, and delete merged branches. Do not squash or rebase when merging PRs.
 
-The approved policy requires PRs, passing CI, resolved review conversations, linear history, and protection against force pushes and deletion of `main`. Require zero reviewer approvals while there is one maintainer; design and implementation-plan approvals still apply. Introduce required CI checks as their tooling becomes available. The active `Protect main` GitHub ruleset enforces these requirements. `.github/rulesets/main.json` records its configuration; `.github/workflows/ci.yml` supplies the required `CI` check.
+The approved policy requires PRs, passing CI, resolved review conversations, merge commits, and protection against force pushes and deletion of `main`. Linear history is not required because it would prohibit merge commits. Require zero reviewer approvals while there is one maintainer; design and implementation-plan approvals still apply. Introduce required CI checks as their tooling becomes available. The active `Protect main` GitHub ruleset enforces these requirements. `.github/rulesets/main.json` records its configuration; `.github/workflows/ci.yml` supplies the required `CI` check.
 
 ## Automation Boundaries
 
