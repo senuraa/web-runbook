@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NX_DAEMON: 'false'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+
+      - name: Set up pnpm from package.json
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+        with:
+          cache: true
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check formatting
+        run: pnpm exec oxfmt --check .
+
+      - name: List workspace projects
+        run: pnpm nx show projects --json
+
+      - name: Run all available lint, typecheck, and build targets
+        run: pnpm nx run-many --targets=lint,typecheck,build --outputStyle=static
+
+      # No test projects exist yet. Every future regression suite must be exposed
+      # through one of these targets, or added here when its target is introduced.
+      - name: Run full available regression suite
+        run: pnpm nx run-many --targets=test,test-integration,e2e --skipNxCache --outputStyle=static

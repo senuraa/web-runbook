@@ -38,15 +38,15 @@ The current direction is a local-first developer tool, with a CLI followed by an
 
 The repository's existing tooling does not settle the full product stack:
 
-| Area | Current position |
-| --- | --- |
-| Primary language | TypeScript, as specified in the brief and configured in the workspace |
-| Workspace tooling | Nx with pnpm, already present in the repository |
-| Browser automation engine | To be decided |
-| AI models, providers, and agent tooling | To be decided; pluggable providers are a goal where practical |
-| Persistent storage | Persistence is planned; database and storage design are undecided |
-| Workflow format and recovery architecture | Still being designed |
-| CLI and MCP implementation | Planned interfaces; implementation choices remain open |
+| Area                                      | Current position                                                      |
+| ----------------------------------------- | --------------------------------------------------------------------- |
+| Primary language                          | TypeScript, as specified in the brief and configured in the workspace |
+| Workspace tooling                         | Nx with pnpm, already present in the repository                       |
+| Browser automation engine                 | To be decided                                                         |
+| AI models, providers, and agent tooling   | To be decided; pluggable providers are a goal where practical         |
+| Persistent storage                        | Persistence is planned; database and storage design are undecided     |
+| Workflow format and recovery architecture | Still being designed                                                  |
+| CLI and MCP implementation                | Planned interfaces; implementation choices remain open                |
 
 The development approach is AI-assisted and specification-driven. The initial focus is practical automation and a public open-source project, with local operation independent of proprietary hosted infrastructure.
 
