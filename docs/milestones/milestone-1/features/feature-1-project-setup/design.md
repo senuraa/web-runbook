@@ -1,6 +1,6 @@
 # Feature 1: Project setup
 
-Status: Branching, formatting, linting, and CI setup implemented; the maintainer confirmed passing CI. The maintainer approved direct implementation of those initial changes without TDD or a separate implementation plan. Testing policy, design, and the combined CI approach are approved. The [behavioral implementation plan](implementation-plan.md) is approved and in progress.
+Status: Branching, formatting, linting, and CI setup implemented; the maintainer confirmed passing CI. The maintainer approved direct implementation of those initial changes without TDD or a separate implementation plan. Testing policy, design, and the combined CI approach are approved. The [behavioral implementation plan](implementation-plan.md) is implemented and validated.
 
 ## Intent and scope
 
@@ -96,7 +96,7 @@ During implementation, verify repository settings, successful and failing CI out
 
 Initial setup uses GitHub Actions with one required `CI` job, Node.js 24, the declared pnpm version, formatting checks, and full-workspace Nx targets. GitHub ruleset configuration is recorded in `.github/rulesets/main.json`; the workflow is `.github/workflows/ci.yml`.
 
-No product test suites exist yet. The regression flow uses `repository:test-ci` for combined unit/integration execution and coverage, and runs other `e2e` targets separately without cache replay. Vitest is configured for the repository tooling tests. The combined coverage command validates project participation and source-file membership, runs each eligible suite once, and publishes reports. GitHub CI validation of this extension is pending. The mock portal and browser tooling remain deferred. These additions remain subject to the normal design, planning, and TDD workflow.
+No product test suites exist yet. The regression flow uses `repository:test-ci` for combined unit/integration execution and coverage, and runs other `e2e` targets separately without cache replay. Vitest is configured for the repository tooling tests. The combined coverage command validates project participation and source-file membership, runs each eligible suite once, and publishes reports. [GitHub CI](https://github.com/senuraa/web-runbook/actions/runs/41284952983) passed on Node.js 24, and its downloadable HTML and JSON coverage reports were verified. The mock portal and browser tooling remain deferred. These additions remain subject to the normal design, planning, and TDD workflow.
 
 For the linting extension, validate representative source, tests, and configuration, line-length boundaries, and staged versus unstaged changes. Confirm hook commands and CI enforcement without claiming any product regression coverage. Husky and lint-staged run sequential staged-file checks through Nx. Install hooks with `pnpm install`, or `pnpm run prepare` in an existing checkout. Root Nx targets expose formatting and linting; TypeScript files must belong to a project tsconfig for typed linting. The independent line-length checker also covers handwritten configuration formats that ESLint does not parse. Generated integration directories, dependencies, build outputs, and lockfiles are excluded explicitly.
 

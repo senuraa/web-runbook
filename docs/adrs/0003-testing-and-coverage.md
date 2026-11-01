@@ -3,7 +3,7 @@
 - Status: Accepted
 - Decision date: 2026-11-01
 - Scope: Milestone 1, Feature 1 — Project setup
-- Implementation: Plan approved; tooling implemented and local validation passed, with GitHub CI validation pending
+- Implementation: Complete; local checks and [GitHub CI](https://github.com/senuraa/web-runbook/actions/runs/41284952983) passed, including report publication
 
 ## Context
 

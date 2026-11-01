@@ -1,6 +1,6 @@
 # Project setup implementation plan
 
-Status: Approved — implementation and validation in progress.
+Status: Complete — approved plan implemented and validated on 2026-11-01.
 
 ## Outcome and scope
 
@@ -25,7 +25,7 @@ Contributors can run focused Vitest suites through Nx. Required CI runs every pa
 
 Dependencies: None. References: [Testing design](design.md#unit-and-integration-testing), [runner and organization](../../../../adrs/0003-testing-and-coverage.md#runner-and-organization).
 
-- [ ] A fresh checkout can install the testing dependencies and run TypeScript tests using ESM through Nx on the supported runtime.
+- [x] A fresh checkout can install the testing dependencies and run TypeScript tests using ESM through Nx on the supported runtime.
 - [x] The local `test` target runs only unit tests; `test-integration` runs only integration tests, including nested integration directories. Helpers and fixtures are not discovered as tests.
 - [x] A combined package run executes the union of both suites exactly once, reports failures from either suite, and exits after completion in CI and agent use.
 - [x] Independent package runs do not discover another package's tests. Local contributor instructions explain focused and combined execution.
@@ -33,7 +33,7 @@ Dependencies: None. References: [Testing design](design.md#unit-and-integration-
 
 Validation: Demonstrate discovery and failure propagation with isolated representative packages, including a package with only unit tests and one with both suites. No invented product package is required in the repository.
 
-Status and evidence: Implemented; local validation passed. Separate unit and integration targets, combined discovery, nested integration tests, unit-only packages, absent tests, and independent temporary workspaces are covered by retained integration checks. Discovery failures were observed before implementation. Fresh-checkout Node.js 24 validation awaits GitHub CI.
+Status and evidence: Complete. Separate unit and integration targets, combined discovery, nested integration tests, unit-only packages, absent tests, and independent temporary workspaces are covered by retained integration checks. Discovery failures were observed before implementation. Fresh-checkout Node.js 24 installation and execution passed in [GitHub CI](https://github.com/senuraa/web-runbook/actions/runs/41284952983).
 
 ### 2. Keep tests isolated and behavior-focused
 
@@ -66,7 +66,7 @@ Status and evidence: Complete. Boundary tests first failed for each metric and t
 
 Dependencies: Items 1–3. References: [Coverage and execution](../../../../adrs/0003-testing-and-coverage.md#coverage-and-execution), [CI policy](../../../../adrs/0001-branching-and-ci-policy.md#decision).
 
-- [ ] Every PR, including documentation-only changes, receives a conclusive required CI result. Each production package participates in the combined run; missing package coverage cannot be silently omitted.
+- [x] Every PR, including documentation-only changes, receives a conclusive required CI result. Each production package participates in the combined run; missing package coverage cannot be silently omitted.
 - [x] CI runs each unit and integration test once, without replaying regression results from cache or additionally running the separate local suite targets. Existing lint, formatting, compiler, build, and other available regression checks remain covered.
 - [x] Test failures, threshold violations, and coverage-processing failures make the required `CI` check fail. Publishing reports cannot overwrite or conceal that failure.
 - [x] CI exposes package-level metric summaries and downloadable HTML and machine-readable reports. Valid reports remain available after threshold failures; unavailable reports are diagnosed clearly. No external coverage service is required.
@@ -74,7 +74,7 @@ Dependencies: Items 1–3. References: [Coverage and execution](../../../../adrs
 
 Validation: Verify passing and deliberately failing CI paths, report availability, package participation, and absence of duplicate suite execution. Record actual results without claiming product regression coverage while no product exists.
 
-Status and evidence: Implemented; local CI-equivalent validation passed. All 39 tests run once in the combined repository suite, with no regression cache replay. Real child Nx runs verify unit and integration failures; runner regressions verify coverage/report failures cannot be hidden by publication. Test-only regression projects also participate. Formatting, lint, TypeScript, and diff checks pass. Actual GitHub execution and artifact download remain pending.
+Status and evidence: Complete. All 39 tests run once in the combined repository suite, with no regression cache replay. Real child Nx runs verify unit and integration failures; runner regressions verify coverage/report failures cannot be hidden by publication. Test-only regression projects also participate. Formatting, lint, TypeScript, and diff checks pass. [GitHub CI](https://github.com/senuraa/web-runbook/actions/runs/41284952983) passed on Node.js 24. The downloaded artifact contains readable HTML, valid JSON reports, and the package summary with the same four metrics. Deliberately failing paths were verified through the local CI runner and retained fixture regressions; the GitHub run verified the passing workflow and publication path.
 
 ## Completion
 
