@@ -13,6 +13,7 @@ Establish the repository foundations for open-source, AI-assisted development: d
 ## Decisions
 
 - [ADR 0001: Branching and CI policy](../../adrs/0001-branching-and-ci-policy.md)
-- [ADR 0002: Formatting and TypeScript linting](../../adrs/0002-formatting-and-typescript-linting.md) — ESLint, Oxfmt, and staged-file hooks configured locally; CI validation pending. Revisit Oxlint if measured CI linting time warrants it.
+- [ADR 0002: Formatting and TypeScript linting](../../adrs/0002-formatting-and-typescript-linting.md) — implemented; maintainer confirmed passing CI. Revisit Oxlint if measured CI linting time warrants it.
+- [ADR 0003: Testing and coverage](../../adrs/0003-testing-and-coverage.md) — policy, testing design, and combined CI approach approved. The [behavioral implementation plan](features/feature-1-project-setup/implementation-plan.md) is approved and in progress; tooling is configured and GitHub CI validation is pending.
 
 Further setup decisions will be added as they are discussed. Acceptance of a policy does not mean its tooling or GitHub enforcement has been implemented.

@@ -9,8 +9,12 @@
   "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@nx/devkit": "24.0.2",
     "@nx/js": "24.0.2",
+    "@nx/vitest": "24.0.2",
     "@swc/helpers": "~0.5.18",
+    "@types/node": "^24.19.2",
+    "@vitest/coverage-v8": "~5.0.1",
     "eslint": "^10.14.0",
     "globals": "^17.13.0",
     "husky": "^9.1.7",
@@ -19,7 +23,9 @@
     "oxfmt": "^0.72.0",
     "tslib": "^2.3.0",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.72.1"
+    "typescript-eslint": "^8.72.1",
+    "vite": "^8.0.0",
+    "vitest": "~5.0.1"
   },
   "packageManager": "pnpm@12.16.1"
 }

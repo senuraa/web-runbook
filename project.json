@@ -21,6 +21,25 @@
     "pre-commit": {
       "command": "pnpm exec lint-staged --concurrent false",
       "cache": false
+    },
+    "test": {
+      "command": "pnpm exec vitest run --exclude 'tests/integration/**'",
+      "cache": false
+    },
+    "test-integration": {
+      "command": "pnpm exec vitest run tests/integration",
+      "cache": false
+    },
+    "test-all": {
+      "cache": false
+    },
+    "typecheck": {
+      "command": "pnpm exec tsc --project tsconfig.spec.json --noEmit",
+      "cache": false
+    },
+    "test-ci": {
+      "command": "node tools/testing/run-ci.mts",
+      "cache": false
     }
   }
 }

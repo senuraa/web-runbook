@@ -44,9 +44,12 @@ Use `pnpm@12.16.1`:
 - `pnpm nx run repository:format`: format supported files with Oxfmt.
 - `pnpm nx run repository:format-check`: check formatting without rewriting files.
 - `pnpm nx run repository:lint`: run ESLint and the hard line-length check.
+- `pnpm nx run repository:test`: run tooling unit tests.
+- `pnpm nx run repository:test-integration`: run isolated tooling integration checks.
+- `pnpm nx run repository:test-ci`: run full combined suites and enforce coverage across eligible projects.
 - `pnpm nx run <project>:<target>`: run an existing target.
 
-No product build, test, or development targets exist yet. CI checks formatting and runs all available Nx `lint`, `typecheck`, `build`, `test`, `test-integration`, and `e2e` targets. Register new regression suites under these targets or extend CI when introducing another target; do not leave suites outside the full regression run.
+No product build, test, or development targets exist yet. CI checks formatting, runs all available Nx `lint`, `typecheck`, and `build` targets, then uses `repository:test-ci` for combined unit/integration execution and coverage enforcement. Other `e2e` targets run separately when introduced. Register every regression suite in this flow; never omit suites or duplicate the combined suites with separate CI runs.
 
 ## Coding Style & Naming
 
@@ -64,7 +67,15 @@ Use TDD for feature development and bug fixes. For each behavior:
 
 Do not write the implementation before observing the failing test. Derive tests from the plan's acceptance criteria and assert observable behavior. Before marking an item complete, run the relevant project test suite and affected integration checks through Nx, and report any failures.
 
-No framework, naming convention, or coverage threshold exists. Document these when adding tests. Use a local mock recruitment portal for browser testing.
+[ADR 0003](docs/adrs/0003-testing-and-coverage.md) defines the implemented testing policy. See [Testing](docs/testing.md) for commands, package onboarding, coverage reports, and test-quality guidance. Use Vitest: colocate unit `*.test.ts` files with source under the Nx `test` target, and put integration tests in each package's `tests/integration/` under `test-integration`. Keep discovery non-overlapping. Browser-test setup is deferred until UI work; use a local mock recruitment portal when introduced.
+
+Run real internal logic by default. Mock external boundaries and nondeterminism; justify internal mocks and never mock the behavior under test. Default suites require no credentials, paid APIs, or public-network access. Tests own and clean up their resources and must pass independently of order.
+
+Every test must protect an acceptance scenario, failure case, or regression and catch an identifiable plausible bug. Assert outcomes; assert calls only when the interaction is required behavior. Review test purpose and mock choices in PRs. Remove redundant tests; use real collaborators when verifying integration. Unit coverage alone does not prove correct integration.
+
+CI must enforce at least 80% statements, branches, functions, and lines per package containing production code, using combined unit-and-integration coverage. Include unimported production files. Exclude tests, fixtures, generated code, and configuration; agents must not weaken thresholds or expand exclusions to pass CI. Exceptions need a documented reason and maintainer approval. Critical behaviors require explicit tests regardless of percentages.
+
+The approved CI approach runs unit and integration suites together once per package, producing combined coverage directly. Keep separate local suite targets, but do not rerun those same suites separately in CI. Coverage collection and processing failures must fail the required check rather than skip enforcement. The [testing implementation plan](docs/milestones/milestone-1/features/feature-1-project-setup/implementation-plan.md) is approved and in progress.
 
 CI must run the full available regression suite on every PR, including retained unit, integration, and browser tests as those suites are introduced. Each bug fix must add a regression test that reproduces the bug before the fix. Revisit affected-only CI execution when measured CI duration becomes a problem; it is not the current policy.
 

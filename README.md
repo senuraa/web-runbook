@@ -72,6 +72,8 @@ pnpm nx run repository:lint
 
 Oxfmt uses two spaces and a 120-character wrapping target. A separate lint check enforces the hard limit for source, tests, and handwritten configuration; documentation is exempt. ESLint supplies the JavaScript and type-aware TypeScript rules.
 
+See [Testing](docs/testing.md) for Vitest commands, the required 80% coverage gate, and adding package suites.
+
 As projects and targets are added, inspect them and run tasks through Nx:
 
 ```sh
