@@ -42,7 +42,7 @@ Reconsider affected-only execution when measured CI duration becomes a problem. 
 
 Contributions have small, traceable changes and consistent automated checks. Full-suite runtime will grow with the project and should be observed before changing this policy. The single maintainer remains responsible for merge decisions. Passing checks are not an independent human review.
 
-The maintainer subsequently authorized initial setup directly through GitHub CLI, explicitly exempting this setup from TDD. GitHub Actions provides the required `CI` check using Node.js 24 and the pnpm version declared in `package.json`. The workflow checks formatting and runs all available Nx `lint`, `typecheck`, and `build` targets.
+The maintainer subsequently authorized initial setup directly through GitHub CLI, explicitly exempting this setup from TDD. GitHub Actions provides the required `CI` check using Node.js 26 LTS and the pnpm version declared in `package.json`. The maintainer selected Node.js 26 LTS on 2026-11-01, replacing the initial Node.js 24 runtime. The workflow checks formatting and runs all available Nx `lint`, `typecheck`, and `build` targets.
 
 [ADR 0003](0003-testing-and-coverage.md) extends this policy with the implemented Vitest setup and per-package coverage gates. CI invokes `repository:test-ci` to run each eligible project's combined `test-all` target once, collecting coverage for production sources. Separate local `test` and `test-integration` targets remain available but are not rerun in CI. Available `e2e` targets run separately. Regression execution does not replay cached results.
 

@@ -94,7 +94,7 @@ Additional testing acceptance criteria:
 
 During implementation, verify repository settings, successful and failing CI outcomes, and representative contribution paths, including forks and documentation-only changes. Confirm each introduced test suite participates in full regression execution.
 
-Initial setup uses GitHub Actions with one required `CI` job, Node.js 24, the declared pnpm version, formatting checks, and full-workspace Nx targets. GitHub ruleset configuration is recorded in `.github/rulesets/main.json`; the workflow is `.github/workflows/ci.yml`.
+Setup uses GitHub Actions with one required `CI` job, Node.js 26 LTS, the declared pnpm version, formatting checks, and full-workspace Nx targets. The maintainer selected Node.js 26 LTS on 2026-11-01 after the initial Node.js 24 validation recorded below. GitHub ruleset configuration is recorded in `.github/rulesets/main.json`; the workflow is `.github/workflows/ci.yml`.
 
 No product test suites exist yet. The regression flow uses `repository:test-ci` for combined unit/integration execution and coverage, and runs other `e2e` targets separately without cache replay. Vitest is configured for the repository tooling tests. The combined coverage command validates project participation and source-file membership, runs each eligible suite once, and publishes reports. [GitHub CI](https://github.com/senuraa/web-runbook/actions/runs/41284952983) passed on Node.js 24, and its downloadable HTML and JSON coverage reports were verified. The mock portal and browser tooling remain deferred. These additions remain subject to the normal design, planning, and TDD workflow.
 

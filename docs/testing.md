@@ -2,7 +2,7 @@
 
 ## Running checks
 
-Use Node.js 24 and the pnpm version declared in `package.json`. Run `pnpm install` in a fresh checkout. Tests use Vitest with a Node environment and explicit imports; compiler checks run separately.
+Use Node.js 26 LTS (26.13.0 or later within 26.x) and the pnpm version declared in `package.json`. Run `pnpm install` in a fresh checkout. Tests use Vitest with a Node environment and explicit imports; compiler checks run separately.
 
 Run tasks through Nx:
 

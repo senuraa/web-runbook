@@ -37,7 +37,7 @@ Keep each item concise and understandable on its own. Link shared context instea
 
 ## Development Commands
 
-Use `pnpm@12.16.1`:
+Use Node.js 26 LTS (26.13.0 or later within 26.x) and `pnpm@12.16.1`:
 
 - `pnpm install`: install dependencies and Husky hooks; use `pnpm run prepare` to reinstall hooks in an existing checkout.
 - `pnpm nx show projects`: discover projects, including the root `repository` tooling project.

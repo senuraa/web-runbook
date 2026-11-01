@@ -60,7 +60,7 @@ The workspace declares `pnpm@12.16.1` as its package manager. With that version 
 pnpm install
 ```
 
-Use Node.js 24, matching CI. Installation also enables the Husky pre-commit hook; run `pnpm run prepare` to reinstall it in an existing checkout. Commits format and lint staged files without running tests or builds. See [Repository Guidelines](AGENTS.md) for the contribution workflow.
+Use Node.js 26 LTS (26.13.0 or later within 26.x), matching CI and the runtime range in `package.json`. Installation also enables the Husky pre-commit hook; run `pnpm run prepare` to reinstall it in an existing checkout. Commits format and lint staged files without running tests or builds. See [Repository Guidelines](AGENTS.md) for the contribution workflow.
 
 Run the repository checks through Nx:
 

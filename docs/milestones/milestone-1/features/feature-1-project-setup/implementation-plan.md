@@ -10,7 +10,7 @@ Contributors can run focused Vitest suites through Nx. Required CI runs every pa
 
 ## Shared constraints
 
-- Preserve Node.js 24, the declared pnpm version, strict TypeScript, ESLint, and Oxfmt.
+- Use Node.js 26 LTS, the declared pnpm version, strict TypeScript, ESLint, and Oxfmt. The maintainer approved the runtime update on 2026-11-01; earlier Node.js 24 validation below remains historical evidence.
 - Unit tests sit beside source as `*.test.ts`; integration tests live in each package's `tests/integration/`. Their discovery must not overlap.
 - Each production package independently requires at least 80% statements, branches, functions, and lines across both suites combined.
 - Default tests use no credentials, paid APIs, or public-network access. Tests own and clean up their resources.
