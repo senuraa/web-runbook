@@ -4,6 +4,37 @@
 
 WebRunbook is in discovery. Read `README.md` and `docs/project-brief.md`; distinguish proposals from implementation. `packages/` is empty; no source, tests, or assets exist. `nx.json` and `tsconfig.base.json` configure the workspace.
 
+## Documentation & Feature Workflow
+
+This is an open-source project developed with AI assistance. Keep contributor context in version-controlled documents:
+
+- `docs/adrs/0001-<decision>.md`: centrally numbered architectural decision records (ADRs), including context, alternatives, the decision, consequences, and status.
+- `docs/milestones/milestone-1-<name>/README.md`: milestone outcome, scope, and feature status.
+- `docs/milestones/milestone-1-<name>/features/feature-1-<name>/design.md`: feature behavior, acceptance criteria, component responsibilities, interfaces, testing strategy, and links to applicable ADRs.
+- `implementation-plan.md` beside each feature's `design.md`: small, independently testable behavioral work items and their status.
+
+The initial `milestone-1/features/feature-1/` directories are placeholders; add descriptive names when scope is agreed. Use `.gitkeep` to retain empty directories until documents replace the placeholders.
+
+For each feature:
+
+1. Brainstorm the problem, scope, alternatives, and acceptance criteria with the maintainer.
+2. Record architectural decisions in ADRs, reusing existing ADRs where applicable.
+3. Write the design document based on those decisions.
+4. Obtain explicit maintainer approval of the design and its ADRs.
+5. Brainstorm the implementation approach separately before writing code; design approval alone does not start implementation.
+6. Break the design into small behavioral work items, ordered by dependencies and risk, and write the implementation plan.
+7. Obtain explicit maintainer approval of the complete implementation plan once. Then implement its work items using TDD without requesting approval for each item.
+
+Contributors and AI agents must read the relevant milestone, design, and ADRs before working. Keep proposals distinct from accepted decisions. Discuss and obtain approval for changes to approved requirements, designs, or ADRs before continuing affected implementation, and update the documents accordingly. Routine implementation choices within the approved scope do not require renewed approval.
+
+## Behavioral Implementation Plans
+
+Describe what the software must do using observable outcomes, inputs, results, failure cases, and concrete acceptance scenarios. Each work item must include its dependencies and links to the applicable design sections and ADRs. Prefer narrow behaviors spanning the components they need over completing entire technical layers first.
+
+Plans must contain no implementation code, pseudocode, test code, prescribed function signatures, or class structures. Agents choose implementation details within the approved design and ADRs. This rule takes precedence over skill templates that embed code in plans.
+
+Keep each item concise and understandable on its own. Link shared context instead of duplicating it; agents should load their assigned item, relevant design sections and ADRs, and the existing code needed for the change. Record completion and validation results as work progresses.
+
 ## Development Commands
 
 Use `pnpm@12.16.1`:
@@ -19,6 +50,14 @@ No build, test, or development targets exist.
 Use strict TypeScript, two-space indentation, and descriptive names. Oxfmt configures single quotes; check files with `pnpm exec oxfmt --check <files>`. No linter is configured.
 
 ## Testing Guidelines
+
+Use TDD for feature development and bug fixes. For each behavior:
+
+1. Write a focused behavioral test and run it; confirm it fails because the behavior is missing or incorrect, not because of a broken test setup.
+2. Write the minimum production code needed to pass, then run the test again.
+3. Refactor while keeping tests green, and repeat for the next behavior.
+
+Do not write the implementation before observing the failing test. Derive tests from the plan's acceptance criteria and assert observable behavior. Before marking an item complete, run the relevant project test suite and affected integration checks through Nx, and report any failures.
 
 No framework, naming convention, or coverage threshold exists. Document these when adding tests. Use a local mock recruitment portal for browser testing.
 
